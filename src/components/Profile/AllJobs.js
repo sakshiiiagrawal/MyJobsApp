@@ -1,17 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import styles from "./AllJobs.module.css";
 import JobContent from "./JobContent";
 import NoJobsFound from "./NoJobsFound";
+import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
 
 const AllJobs = () => {
   const [jobs, setJobs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [httpError, setHttpError] = useState(null);
+  const authCtx = useContext(AuthContext);
+  const history = useHistory();
 
   useEffect(() => {
+    if (!authCtx.token) {
+      history.replace("/");
+    }
+
     const fetchJobs = async () => {
       const response = await fetch(
-        "https://jobs-api.squareboat.info/api/v1/jobs"
+        "https://jobs-api.squareboat.info/api/v1/recruiters/jobs",
+        {
+          method: "GET",
+          headers: {
+            Authorization: authCtx.token,
+          },
+        }
       );
 
       if (!response.ok) {
@@ -19,7 +33,7 @@ const AllJobs = () => {
       }
 
       const responseData = await response.json();
-      const resData = responseData.data;
+      const resData = responseData.data.data;
       const loadedJobs = [];
 
       for (const key in resData) {
@@ -31,8 +45,6 @@ const AllJobs = () => {
           location: resData[key].location,
         });
       }
-
-      console.log(loadedJobs);
 
       setJobs(loadedJobs);
       setIsLoading(false);

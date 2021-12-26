@@ -8,10 +8,11 @@ import classes from "./MainNavigation.module.css";
 const MainNavigation = () => {
   const history = useHistory();
   const authCtx = useContext(AuthContext);
-  const isLoggedIn = authCtx.isLoggedIn;
+  const isLoggedIn = authCtx.token || null;
 
   const logoutHandler = () => {
-    authCtx.logout();
+    authCtx.setToken(null);
+    localStorage.clear();
     history.replace("/");
   };
 
@@ -33,6 +34,11 @@ const MainNavigation = () => {
             {isLoggedIn && (
               <li>
                 <Link to="/newjob">Post a Job</Link>
+              </li>
+            )}
+            {isLoggedIn && (
+              <li>
+                <Link to="/profile">Profile</Link>
               </li>
             )}
             {isLoggedIn && (

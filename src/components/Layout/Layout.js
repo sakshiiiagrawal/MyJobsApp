@@ -1,11 +1,12 @@
 import { Fragment } from "react";
 import MainNavigation from "./MainNavigation";
+import classes from "./Layout.module.css";
 
 const Layout = (props) => {
   return (
     <Fragment>
       <MainNavigation />
-      <main>{props.children}</main>
+      <main className={classes.child}>{props.children}</main>
     </Fragment>
   );
 };

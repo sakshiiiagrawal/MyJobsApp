@@ -8,44 +8,44 @@ import ForgotPasswordPage from "./pages/ForgotPasswordPage";
 import ResetPasswordPage from "./pages/ResetPasswordPage";
 import NewJobPage from "./pages/NewJobPage";
 import AllJobsPage from "./pages/AllJobsPage";
-// import { useContext } from "react";
-// import AuthContext from "./store/auth-context";
+import { useState } from "react";
+import AuthContext from "./store/auth-context";
 
 function App() {
-  // const authCtx = useContext(AuthContext);
+  let initToken = localStorage.getItem("token");
+  const [token, setToken] = useState(initToken);
+
   return (
-    <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <HomePage />
-        </Route>
-        <Route path="/login">
-          <LoginPage />
-        </Route>
-        <Route path="/signup">
-          <SignupPage />
-        </Route>
-        <Route path="/forgotpassword">
-          <ForgotPasswordPage />
-        </Route>
-        <Route path="/resetpassword/:enteredEmail">
-          <ResetPasswordPage />
-        </Route>
-        {/* {authCtx.isLoggedIn && ( */}
-        <Route path="/newjob">
-          <NewJobPage />
-        </Route>
-        {/* )} */}
-        {/* {authCtx.isLoggedIn && ( */}
-        <Route path="/profile">
-          <AllJobsPage />
-        </Route>
-        {/* )} */}
-        <Route path="*">
-          <Redirect to="/" />
-        </Route>
-      </Switch>
-    </Layout>
+    <Switch>
+      <AuthContext.Provider value={{ token, setToken }}>
+        <Layout>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/signup">
+            <SignupPage />
+          </Route>
+          <Route path="/forgotpassword">
+            <ForgotPasswordPage />
+          </Route>
+          <Route path="/resetpassword/:enteredEmail">
+            <ResetPasswordPage />
+          </Route>
+          <Route path="/newjob">
+            <NewJobPage />
+          </Route>
+          <Route path="/profile">
+            <AllJobsPage />
+          </Route>
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
+        </Layout>
+      </AuthContext.Provider>
+    </Switch>
   );
 }
 

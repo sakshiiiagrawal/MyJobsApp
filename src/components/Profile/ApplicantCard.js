@@ -1,17 +1,21 @@
 import classes from "./ApplicantCard.module.css";
+import applicantIcon from "../../assets/applicant.png";
 
 const ApplicantCard = (props) => {
   return (
     <div className={classes.card}>
-      <li className={classes.applicant}>
-        <div>
-          <h3>{props.title}</h3>
-          <div className={classes.description}>{props.description}</div>
+      <div className={classes.cardAvatar}>
+        <img src={applicantIcon} alt="Applicant Card" />
+      </div>
+      <div className={classes.cardDetails}>
+        <div className={classes.name}>{props.name}</div>
+        <div className={classes.email}>{props.email}</div>
+
+        <div className={classes.skills}>
+          <label>Skills</label>
+          <span className={classes.value}>{props.skills}</span>
         </div>
-        <div className={classes.splitButton}>
-          <div className={classes.location}>{props.location}</div>
-        </div>
-      </li>
+      </div>
     </div>
   );
 };

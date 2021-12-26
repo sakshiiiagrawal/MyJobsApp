@@ -1,5 +1,3 @@
-// // import { useState } from "react";
-
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import classes from "./ForgotPassword.module.css";

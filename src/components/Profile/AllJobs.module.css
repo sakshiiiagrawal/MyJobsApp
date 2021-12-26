@@ -6,7 +6,9 @@
 }
 
 .jobs h2 {
-  color: #303f60;
+  color: #ffffff;
+  font: inherit;
+  font-size: 1.5rem;
 }
 
 .jobs ul {

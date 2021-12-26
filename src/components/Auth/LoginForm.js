@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useRef, useContext } from "react";
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useInput from "../../hooks/use-input";
 import AuthContext from "../../store/auth-context";
@@ -12,7 +12,7 @@ const LoginForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [gotError, setGotError] = useState(false);
   const authCtx = useContext(AuthContext);
-  // const history = useHistory();
+  const history = useHistory();
 
   const isNotEmpty = (value) => value.trim() !== "";
   const isEmail = (value) => value.includes("@") && value.trim() !== "";
@@ -55,16 +55,13 @@ const LoginForm = () => {
       })
       .then((response) => {
         const { data } = response;
-        console.log(data);
         if (data.success) {
-          authCtx.login(data.data.token);
-          console.log(data.data.token);
-          // console.log(authCtx.isLoggedIn);
-          // history.replace("/profile");
+          resetEmailInput();
+          resetPasswordInput();
+          localStorage.setItem("token", data.data.token);
+          authCtx.setToken(data.data.token);
+          history.replace("/profile");
         }
-
-        resetEmailInput();
-        resetPasswordInput();
       })
       .catch((error) => {
         let errorMessage = "Invalid email address or password.";
@@ -75,6 +72,7 @@ const LoginForm = () => {
         ) {
           errorMessage = error.response.data.message;
         }
+        console.error(error);
         setErrorMsg(errorMessage);
         setGotError(true);
       });

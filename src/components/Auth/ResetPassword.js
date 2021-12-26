@@ -29,9 +29,7 @@ const ResetPassword = () => {
         `https://jobs-api.squareboat.info/api/v1/auth/resetpassword?email=${enteredEmail}`
       )
       .then((response) => {
-        console.log(response);
         const newToken = response.data.data.token;
-        console.log(newToken);
 
         axios
           .post("https://jobs-api.squareboat.info/api/v1/auth/resetpassword", {
@@ -41,7 +39,6 @@ const ResetPassword = () => {
           })
           .then((response) => {
             history.replace("/login");
-            console.log(response);
           })
           .catch((error) => {
             let errorMessage = "Invalid credentials.";

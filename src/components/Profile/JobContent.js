@@ -9,6 +9,10 @@ const JobContent = (props) => {
     setModalIsOpen(true);
   };
 
+  const hideApplicationHandler = () => {
+    setModalIsOpen(false);
+  };
+
   return (
     <div className={classes.card}>
       <li className={classes.job}>
@@ -21,7 +25,9 @@ const JobContent = (props) => {
           <button onClick={veiwApplicationHandler}>View Application</button>
         </div>
       </li>
-      {modalIsOpen && <ApplicantsModal jobId={props.id} />}
+      {modalIsOpen && (
+        <ApplicantsModal jobId={props.id} onClose={hideApplicationHandler} />
+      )}
     </div>
   );
 };

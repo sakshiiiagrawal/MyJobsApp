@@ -20,11 +20,16 @@
 }
 
 .control button {
-  background: #43afff 0% 0% no-repeat padding-box;
-  border: 1px solid #43afff;
+  border: 1px solid #c6c6c6;
   border-radius: 5px;
   margin-right: 5px;
-  color: white;
+  color: #303f60;
+}
+
+.colorBlue {
+  background: #43afff 0% 0% no-repeat padding-box;
+  border: 1px solid #43afff !important;
+  color: white !important;
 }
 
 .control label {

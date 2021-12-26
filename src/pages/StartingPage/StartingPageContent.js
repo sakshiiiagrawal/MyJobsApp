@@ -1,9 +1,12 @@
 import classes from "./StartingPageContent.module.css";
 import { Link } from "react-router-dom";
-import { Fragment } from "react";
+import { Fragment, useContext } from "react";
 import displayImage from "../../assets/displayPicture.jpg";
+import companiesImage from "../../assets/companies.png";
+import AuthContext from "../../store/auth-context";
 
 const StartingPageContent = () => {
+  const authCtx = useContext(AuthContext);
   return (
     <Fragment>
       <div className={classes.container}>
@@ -17,9 +20,11 @@ const StartingPageContent = () => {
                 My<span className={classes.colorBlue}>Jobs</span>
               </b>
             </h1>
-            <button>
-              <Link to="/signup">Get Started</Link>
-            </button>
+            {!authCtx.token && (
+              <button>
+                <Link to="/signup">Get Started</Link>
+              </button>
+            )}
           </div>
 
           <div className={classes.column50}>
@@ -61,7 +66,9 @@ const StartingPageContent = () => {
       <section className={classes.ending}>
         <div className={classes.row}>
           <h2 className={classes.rowHeading}>Companies Who Trust Us</h2>
-          <span></span>
+          <span>
+            <img src={companiesImage} alt="Companies Who Trust Us" />
+          </span>
         </div>
       </section>
     </Fragment>

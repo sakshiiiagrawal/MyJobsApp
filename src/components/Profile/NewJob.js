@@ -4,6 +4,7 @@ import axios from "axios";
 import { useContext, useRef } from "react";
 import useInput from "../../hooks/use-input";
 import AuthContext from "../../store/auth-context";
+import { useHistory } from "react-router-dom";
 
 const NewJob = () => {
   const jobTitleInputRef = useRef();
@@ -11,6 +12,8 @@ const NewJob = () => {
   const locationInputRef = useRef();
 
   const authCtx = useContext(AuthContext);
+
+  const history = useHistory();
 
   const isNotEmpty = (value) => value.trim() !== "";
 
@@ -77,6 +80,7 @@ const NewJob = () => {
       )
       .then((response) => {
         console.log(response);
+        history.replace("/profile");
       });
 
     resetJobTitleInput();
