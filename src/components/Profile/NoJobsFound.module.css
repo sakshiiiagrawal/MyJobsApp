@@ -1,0 +1,41 @@
+.job {
+  justify-content: space-between;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+.job img {
+  width: 106px;
+  height: 106px;
+  display: block;
+  max-width: 100%;
+  opacity: 0.5;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.job h2 {
+  text-align: center;
+  letter-spacing: 0px;
+  color: #303f60;
+  opacity: 0.8;
+}
+
+.job button {
+  padding: 14px 28px;
+  cursor: pointer;
+  background: #43afff 0% 0% no-repeat padding-box;
+  border: 1px solid #43afff;
+  border-radius: 5px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.job button a {
+  text-decoration: none;
+  color: white;
+  font: inherit;
+}
