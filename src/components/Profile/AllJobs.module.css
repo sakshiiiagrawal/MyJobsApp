@@ -6,9 +6,13 @@
 }
 
 .jobs h2 {
-  color: #ffffff;
   font: inherit;
   font-size: 1.5rem;
+}
+
+.jobHeading {
+  color: #ffffff;
+  margin-left: -200px;
 }
 
 .jobs ul {
@@ -38,3 +42,48 @@
     transform: translateY(0);
   }
 }
+
+.paginationBtns {
+  width: 80%;
+  height: 40px;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  bottom: -500px;
+}
+
+.paginationBtns a {
+  padding: 10px;
+  margin: 8px;
+  border-radius: 5px;
+  background: #43afff33 0% 0% no-repeat padding-box;
+  color: grey;
+  cursor: pointer;
+}
+
+.paginationBtns a:hover {
+  color: white;
+  background-color: grey;
+  border: 1px solid grey;
+  border-radius: 5px;
+}
+
+.paginationActive a {
+  border: 1px solid grey;
+  color: #303f60;
+}
+
+.paginationDisabled a {
+  border: 1px solid rgb(153, 153, 153);
+  background-color: transparent;
+  color: rgb(153, 153, 153);
+  border-radius: 5px;
+}
+
+/* .previousBtn {
+  font-size: 30px !important;
+  border: 1px solid rgb(153, 153, 153) !important;
+  background-color: transparent !important;
+  color: rgb(153, 153, 153) !important;
+} */

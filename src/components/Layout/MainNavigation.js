@@ -1,49 +1,61 @@
-import { useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 import AuthContext from "../../store/auth-context";
+import Dropdown from "./Dropdown";
+import InitialIcon from "./InitialIcon";
 
 import classes from "./MainNavigation.module.css";
 
 const MainNavigation = () => {
-  const history = useHistory();
+  const [isSignupPage, setIsSignupPage] = useState(false);
+
   const authCtx = useContext(AuthContext);
   const isLoggedIn = authCtx.token || null;
 
-  const logoutHandler = () => {
-    authCtx.setToken(null);
-    localStorage.clear();
-    history.replace("/");
-  };
+  const location = useLocation();
+  const pathName = location.pathname;
+
+  useEffect(() => {
+    console.log(pathName);
+    if (pathName.includes("/signup")) {
+      setIsSignupPage(true);
+    }
+    console.log(isSignupPage);
+  }, [pathName]);
+  console.log(isSignupPage);
 
   return (
     <div className={classes.container}>
       <header className={classes.header}>
-        <Link to="/">
+        <NavLink to="/">
           <div className={classes.logo}>MyJobs</div>
-        </Link>
+        </NavLink>
         <nav>
           <ul>
-            {!isLoggedIn && (
+            {!isLoggedIn && !isSignupPage && (
               <li>
                 <button>
-                  <Link to="/login">Login/Signup</Link>
+                  <NavLink to="/login">Login/Signup</NavLink>
                 </button>
               </li>
             )}
             {isLoggedIn && (
               <li>
-                <Link to="/newjob">Post a Job</Link>
+                <NavLink to="/newjob" activeClassName={classes.active}>
+                  Post a Job
+                </NavLink>
               </li>
             )}
             {isLoggedIn && (
               <li>
-                <Link to="/profile">Profile</Link>
+                <NavLink to="/profile">
+                  <InitialIcon />
+                </NavLink>
               </li>
             )}
             {isLoggedIn && (
-              <li>
-                <button onClick={logoutHandler}>Logout</button>
+              <li className={classes.dropdown}>
+                <Dropdown />
               </li>
             )}
           </ul>

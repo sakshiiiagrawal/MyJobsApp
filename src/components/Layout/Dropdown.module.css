@@ -1,0 +1,56 @@
+.dropdown {
+  width: 400px;
+  height: 100vh auto;
+}
+
+.dropdownBtn {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.iconStyle {
+  color: white;
+  font-size: 30px !important;
+}
+
+.bubble {
+  width: 100px;
+  height: 47px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  position: absolute;
+  cursor: pointer;
+  border-radius: 10px;
+  z-index: 1;
+  min-width: 160px;
+  padding: 12px 16px;
+  transform: translate(-75%, 35%);
+}
+.bubble:after {
+  content: "";
+  position: absolute;
+  bottom: -webkit-calc(
+    100% - 10px
+  ); /*may require prefix for old browser support*/
+  bottom: calc(100% - 10px); /*i.e. half the height*/
+  right: 20px;
+  height: 15px;
+  width: 15px;
+  background: white;
+  transform: rotate(45deg);
+  border-top: inherit;
+  border-right: inherit;
+  box-shadow: inherit;
+  z-index: 0;
+}
+
+.items {
+  padding: 0 10px 10px 0;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+  font: inherit;
+  letter-spacing: 0px;
+  color: #303f60;
+  opacity: 1;
+}

@@ -33,6 +33,7 @@
   border: 1px solid #43afff;
   background: #e3f3ff 0% 0% no-repeat padding-box;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 .applicantsError {

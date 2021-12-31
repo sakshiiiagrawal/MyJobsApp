@@ -2,8 +2,16 @@ import classes from "./StartingPageContent.module.css";
 import { Link } from "react-router-dom";
 import { Fragment, useContext } from "react";
 import displayImage from "../../assets/displayPicture.jpg";
-import companiesImage from "../../assets/companies.png";
 import AuthContext from "../../store/auth-context";
+import company1 from "../../assets/company1.png";
+import company2 from "../../assets/company2.png";
+import company3 from "../../assets/company3.png";
+import company4 from "../../assets/company4.png";
+import company5 from "../../assets/company5.png";
+import company6 from "../../assets/company6.png";
+import company7 from "../../assets/company7.png";
+import company8 from "../../assets/company8.png";
+import company9 from "../../assets/company9.png";
 
 const StartingPageContent = () => {
   const authCtx = useContext(AuthContext);
@@ -64,11 +72,21 @@ const StartingPageContent = () => {
         </section>
       </div>
       <section className={classes.ending}>
-        <div className={classes.row}>
-          <h2 className={classes.rowHeading}>Companies Who Trust Us</h2>
-          <span>
-            <img src={companiesImage} alt="Companies Who Trust Us" />
-          </span>
+        <div className={classes.imageContainer}>
+          <h2 className={classes.imageHeading}>Companies Who Trust Us</h2>
+          <div className={classes.imageRow}>
+            <img src={company1} alt="Solaytic" />
+            <img src={company2} alt="Cognizant" />
+            <img src={company3} alt="Squareboat" />
+            <img src={company4} alt="Myntra" />
+            <img src={company5} alt="Flipkart" />
+          </div>
+          <div className={classes.imageRow}>
+            <img src={company6} alt="TCS" />
+            <img src={company7} alt="Huawei" />
+            <img src={company8} alt="Accenture" />
+            <img src={company9} alt="Deloitte" />
+          </div>
         </div>
       </section>
     </Fragment>

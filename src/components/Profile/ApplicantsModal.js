@@ -4,6 +4,7 @@ import styles from "./ApplicantsModal.module.css";
 import ApplicantCard from "./ApplicantCard";
 import NoApplicantsFound from "./NoApplicantsFound";
 import AuthContext from "../../store/auth-context";
+import CloseIcon from "@mui/icons-material/Close";
 
 const ApplicantsModal = (props) => {
   const [applicants, setApplicants] = useState([]);
@@ -29,24 +30,29 @@ const ApplicantsModal = (props) => {
       }
 
       const responseData = await response.json();
-      const resData = responseData.data;
+
       const loadedApplicants = [];
 
-      for (const key in resData) {
-        loadedApplicants.push({
-          key: key,
-          id: resData[key].id,
-          name: resData[key].name,
-          email: resData[key].email,
-          skills: resData[key].skills,
-        });
+      if (responseData?.data) {
+        const resData = responseData.data;
+        for (const key in resData) {
+          loadedApplicants.push({
+            key: key,
+            id: resData[key].id,
+            name: resData[key].name,
+            email: resData[key].email,
+            skills: resData[key].skills,
+          });
+        }
       }
 
       setApplicants(loadedApplicants);
       setIsLoading(false);
+      console.log(applicants);
     };
 
     fetchApplicant().catch((error) => {
+      console.log(applicants);
       setIsLoading(false);
       setHttpError(error.message);
     });
@@ -70,6 +76,8 @@ const ApplicantsModal = (props) => {
 
   let showContent, countText;
 
+  console.log(applicants);
+
   if (applicants.length > 0) {
     showContent = applicants.map((applicant) => (
       <ApplicantCard
@@ -88,14 +96,14 @@ const ApplicantsModal = (props) => {
 
   return (
     <Modal onClose={props.onClose}>
-      <React.Fragment>
-        <section className={styles.applicants}>
-          <h2>Applicants for this job</h2>
-          <button onClick={props.onClose}>X</button>
-          <h3>{countText}</h3>
-          <ul>{showContent}</ul>
-        </section>
-      </React.Fragment>
+      <section className={styles.applicants}>
+        <h2>Applicants for this job</h2>
+        <button onClick={props.onClose}>
+          <CloseIcon />
+        </button>
+        <h3>{countText}</h3>
+        <ul>{showContent}</ul>
+      </section>
     </Modal>
   );
 };

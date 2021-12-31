@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useRef, useState } from "react";
+import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import useInput from "../../hooks/use-input";
 import classes from "./SignupForm.module.css";
@@ -7,6 +8,7 @@ import classes from "./SignupForm.module.css";
 const SignupForm = () => {
   const [errorMsg, setErrorMsg] = useState("");
   const [gotError, setGotError] = useState(false);
+  // const [enteredSkills, setEnteredSkills] = useState("");
 
   const nameInputRef = useRef();
   const emailInputRef = useRef();
@@ -14,8 +16,11 @@ const SignupForm = () => {
   const confirmPwdInputRef = useRef();
   const skillsInputRef = useRef();
 
+  const history = useHistory();
+
   const isNotEmpty = (value) => value.trim() !== "";
   const isEmail = (value) => value.includes("@") && value.trim() !== "";
+  const isValue = (value) => value.includes("");
 
   const {
     value: enteredFullName,
@@ -53,6 +58,12 @@ const SignupForm = () => {
     reset: resetConfirmPwdInput,
   } = useInput(isNotEmpty);
 
+  const {
+    value: enteredSkills,
+    valueChangeHandler: skillsInputChangeHandler,
+    reset: resetSkillsInput,
+  } = useInput(isValue);
+
   let formIsValid = false;
 
   if (
@@ -70,8 +81,6 @@ const SignupForm = () => {
       return;
     }
 
-    const enteredSkills = skillsInputRef.current.value;
-
     axios
       .post("https://jobs-api.squareboat.info/api/v1/auth/register", {
         email: enteredEmail,
@@ -83,6 +92,7 @@ const SignupForm = () => {
       })
       .then((response) => {
         console.log(response);
+        history.replace("/login");
       })
       .catch((error) => {
         console.log(error.response.data.errors);
@@ -107,6 +117,8 @@ const SignupForm = () => {
     resetEmailInput();
     resetPasswordInput();
     resetConfirmPwdInput();
+    resetSkillsInput();
+    // setEnteredSkills("");
   };
 
   return (
@@ -216,6 +228,8 @@ const SignupForm = () => {
             ref={skillsInputRef}
             id="skills"
             placeholder="Enter comma separated skills"
+            value={enteredSkills}
+            onChange={skillsInputChangeHandler}
           />
           {gotError && <p className={classes.errorText}>{errorMsg}</p>}
         </div>
